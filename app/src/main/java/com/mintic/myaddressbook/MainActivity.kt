@@ -1,5 +1,6 @@
 package com.mintic.myaddressbook
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -16,14 +17,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAdapter: ContactsAdapter
     private lateinit var recycler: RecyclerView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private lateinit var contact: Contact
+
+    override  fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         recycler = findViewById(R.id.contact_list)
         setupRecyclerView()
         generateContacts()
-//        mContacts = createMockContacts()
+    // mContacts = createMockContacts()
     }
 
     /**
@@ -43,10 +46,15 @@ class MainActivity : AppCompatActivity() {
 
         recycler.adapter = mAdapter
     }
-
-    /* RecyclerView item is clicked. */
+    /* RecyclerView item is clicked */
     private fun contactOnClick(contact: Contact) {
         Log.d(TAG, "Click on: $contact")
+        navigateToDetail()
+    }
+
+    private fun navigateToDetail() {
+        val intent = Intent(this, miradorActivity::class.java)
+        startActivity(intent)
     }
 
     /**
